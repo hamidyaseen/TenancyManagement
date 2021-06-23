@@ -7,6 +7,8 @@ import { LoginModule } from './login/login.module';
 import { DesktopComponent } from './top/desktop/desktop.component';
 import { CommonModule } from '@angular/common';
 import { PathNotFoundComponent } from './top/path-not-found/path-not-found.component';
+import { AppMaterialModule } from './app-material/app-material.module';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,12 +24,16 @@ const routes: Routes = [
     HomeComponent,
     AboutComponent,
     PrivacyComponent,    
-    DesktopComponent, PathNotFoundComponent
+    DesktopComponent,
+    PathNotFoundComponent
   ],
   imports: [
     // As I am linking top component to app routing
     CommonModule,
-    RouterModule.forRoot(routes), LoginModule],
+    RouterModule.forRoot(routes),
+    LoginModule,
+    AppMaterialModule    
+  ],
   exports: [RouterModule] 
 })
 export class AppRoutingModule { }
