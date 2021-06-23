@@ -11,14 +11,14 @@
           <a class="nav-link text-dark" [routerLink]="['/home']">Home</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/customers']">Customers</a>
+          <a class="nav-link text-dark" [routerLink]="['/customers']">Mit Tenancies</a>
         </li>
         <!--<li class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/users']">Users</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/crisis']">Crisis-Center</a>
-        </li>-->
+    <a class="nav-link text-dark" [routerLink]="['/users']">Users</a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="['link-active']">
+    <a class="nav-link text-dark" [routerLink]="['/crisis']">Crisis-Center</a>
+  </li>-->
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark" [routerLink]="['/privacy']">Privacy</a>
         </li>
@@ -28,7 +28,16 @@
 
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark" [routerLink]="['/about']">About</a>
-        </li>        
+        </li>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <!--*ngIf="(loginAction$|async)===false"-->
+          <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+          <!--*ngIf="(loginAction$|async)===true"(click)="logMeOut()"
+  <a class="nav-link text-dark">Logout</a>-->
+        </li>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" [routerLink]="['/register']">Join Now</a>
+        </li>
       </ul>
     </div>
   </div>
