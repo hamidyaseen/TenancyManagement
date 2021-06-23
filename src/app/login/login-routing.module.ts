@@ -1,4 +1,6 @@
+
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +19,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     AppMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [RouterModule]  
 })

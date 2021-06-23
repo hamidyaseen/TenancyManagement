@@ -2,3 +2,29 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.central-res-card {
+  width: 97%;
+  margin: auto;
+}
+.element-md {
+  width: 97%;
+  margin: 0.25em 0.15em;
+}
+
+
+@media screen and (min-width: 576px) {
+  .central-res-card {
+    width: 71%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .central-res-card {
+    width: 51%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .central-res-card {
+    width: 43%;
+  }
+}

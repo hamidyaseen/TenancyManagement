@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../login-auth/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,12 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class TopbarComponent implements OnInit {
 
   public isExpanded: boolean = false;
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   toggle(): void {
     this.isExpanded = !this.isExpanded;
+  }
+  logMeOut(): void {
+    this.authService.logout().subscribe(x => this.router.navigate(['/home']));
   }
 }

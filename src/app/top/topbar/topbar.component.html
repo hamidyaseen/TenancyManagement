@@ -33,7 +33,11 @@
           <!--*ngIf="(loginAction$|async)===false"-->
           <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
           <!--*ngIf="(loginAction$|async)===true"(click)="logMeOut()"
-  <a class="nav-link text-dark">Logout</a>-->
+    <a class="nav-link text-dark">Logout</a>-->
+        </li>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <!--*ngIf="(loginAction$|async)===true"-->
+          <a class="nav-link text-dark" (click)="logMeOut()">Logout</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark" [routerLink]="['/register']">Join Now</a>

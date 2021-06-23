@@ -1,1 +1,48 @@
-<p>register works!</p>
+<div class="container">
+  <div class="card card-small central-res-card">
+    <mat-toolbar style="background:none;">
+      <mat-toolbar-row>
+        <mat-icon class="pad-11-left">person_add</mat-icon>
+        <span class="pad-11-left">Register</span>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <p class=".pad-11-left" style="font-size:small"> Welcome to sign up for tenancy system</p>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="firstName" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+        <!--<mat-hint>Hint</mat-hint>-->
+      </mat-form-field>     
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+        <!--<mat-hint>Hint</mat-hint>-->
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Select a user name</mat-label>
+        <input matInput placeholder="User name" formControlName="username" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Select a password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="password" formControlName="password" autocomplete="off" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <div style="width: 100%; text-align:center;">
+        <button mat-stroked-button color="primary" routerLink="/login" class="space-md">Cancel</button>
+        <button mat-stroked-button color="primary" type="submit" class="space-md">Register</button>
+      </div>
+      <div style="display:none">
+        <p>form status :- {{registerForm.status}}</p>
+        <p>form condit :- {{registerForm.dirty}}</p>
+      </div>
+    </form>
+  </div>
+</div>
