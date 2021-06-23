@@ -43,3 +43,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.vs/VSWorkspaceState.json
+.vs/TenancyManagement-LocalCopy/config/applicationhost.config
+.vs/slnx.sqlite
+.vs/TenancyManagement-LocalCopy/v16/.suo
