@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'privacy', component: PrivacyComponent },
+  { path: 'desktop', component: DesktopComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PathNotFoundComponent },
 ];
