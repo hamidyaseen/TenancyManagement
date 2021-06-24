@@ -8,14 +8,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthGuard } from '../login-auth/auth-guard';
 
 const routes: Routes = [
   {
     path: '',
     component: CustomerComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
+        canActivateChild: [AuthGuard],
         children: [
           { path: 'properties', component: PropertyListComponent },
           { path: 'tenancies', component: TenacyListComponent },

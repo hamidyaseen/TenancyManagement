@@ -1,7 +1,4 @@
-
-export interface IdWise {
-  id: number;
-}
+import { IdWise } from "./idWise";
 
 export interface IUser extends IdWise {  
   firstName: string;

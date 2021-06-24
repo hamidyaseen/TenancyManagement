@@ -2,7 +2,8 @@ import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo, ResponseOptions } from 'angular-in-memory-web-api';
 import { v4 as uuidv4 } from 'uuid';
-import { IdWise, IUser } from '../model/user';
+import { IdWise } from '../model/idWise';
+import { IUser } from '../model/user';
 import { UserData } from './user-data';
 
 export interface IAppData {

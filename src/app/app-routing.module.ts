@@ -8,6 +8,7 @@ import { DesktopComponent } from './top/desktop/desktop.component';
 import { CommonModule } from '@angular/common';
 import { PathNotFoundComponent } from './top/path-not-found/path-not-found.component';
 import { AppMaterialModule } from './app-material/app-material.module';
+import { AuthGuard } from './login-auth/auth-guard';
 
 
 const routes: Routes = [
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   {
     path: 'customer',
-    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule),
+    
   },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'desktop', component: DesktopComponent },
