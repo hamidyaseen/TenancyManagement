@@ -19,10 +19,8 @@ export class LoginImpService {
   validateUser(user: string, pass: string): Observable<IUser> {
     return this.http.post<IUser>(this.baseUrl, { username: user, password: pass }, this.postOptions)
       .pipe(
-        tap(result => {
-          console.log(result);
-        }),
-        catchError(error => throwError(error))
+        tap(result => console.log(result.firstName)),
+        catchError(ErrorHandlerService.handle<IUser>('Create new user', {} as IUser))
       );
   }
 

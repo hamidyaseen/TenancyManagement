@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AlertService } from '../../login-auth/alert.service';
 import { AuthService } from '../../login-auth/auth.service';
 import { IUser } from '../../model/user';
