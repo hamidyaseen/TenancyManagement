@@ -1,0 +1,18 @@
+<div class="container">
+
+  <!-- Toolbar -->
+  <div class="toolbar" role="banner">
+    <img width="40" src="assets/images/main.png" />
+    <span>Welcome to</span>
+    <div class="flex-spacer"></div>
+    <nav>
+      <button mat-flat-button [routerLink]="['./properties']">Properties</button>
+      <button mat-flat-button [routerLink]="['./tenancies']">Tenancies</button>
+      <button mat-flat-button [routerLink]="['./persons']">Persons</button>
+      <button mat-flat-button [routerLink]="['./dashboard']">Dashboard</button>
+    </nav>
+  </div> 
+  
+  <router-outlet></router-outlet>
+</div>
+

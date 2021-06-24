@@ -13,6 +13,10 @@ import { AppMaterialModule } from './app-material/app-material.module';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  {
+    path: 'customer',
+    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
+  },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'desktop', component: DesktopComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,7 +36,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     LoginModule,
-    AppMaterialModule    
+    AppMaterialModule        
   ],
   exports: [RouterModule] 
 })
