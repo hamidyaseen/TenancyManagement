@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { InMemoryBackendConfigArgs, InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './model-data/in-memory-data.service';
 import { environment } from '../environments/environment';
+import { AboutAlertComponent } from './top/about-alert/about-alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopbarComponent
+    TopbarComponent,
+    AboutAlertComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IUser } from '../model/user';
 import { LoginImpService } from './login-imp.service';
@@ -9,7 +9,7 @@ import { LoginImpService } from './login-imp.service';
 })
 export class AuthService
 {
-  private isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
   
   private re_direct_url: string = '';
   set redirectUrl(url: string) { this.re_direct_url = url; }

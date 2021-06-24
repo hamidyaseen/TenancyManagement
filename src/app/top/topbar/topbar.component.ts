@@ -11,6 +11,7 @@ export class TopbarComponent implements OnInit {
 
   public isExpanded: boolean = false;
   constructor(private authService: AuthService, private router: Router) { }
+  observeLogin$ = this.authService.observeLogin$;
 
   ngOnInit(): void {
   }

@@ -13,15 +13,10 @@ import { IUser } from '../../model/user';
 })
 export class RegisterComponent implements OnInit {
 
-  loading: boolean = false;
-  submitted: boolean = false;
   hide: boolean = true;
- // registerSub: Subscription | undefined;
 
-  constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private alert: AlertService) {
+  constructor(private formBuilder: FormBuilder,   private authService: AuthService,
+    private router: Router,   private alert: AlertService) {
   }
 
   registerForm = this.formBuilder.group({
@@ -34,21 +29,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void { }
   ngOnDestroy(): void { }
 
-  onSubmit(): void {
-    //temp
-    //if (this.authService.isLoggedIn)
-    //  this.authService.logout().subscribe(next => this.tryToRegister());
-    //else
-    this.authService.observeLogin$.subscribe(state => {
-      if (state)
-        this.authService.logout().subscribe(next => this.tryToRegister())
-      else
-        this.tryToRegister();
-    });
+  onSubmit(): void {    
+    if (this.authService.isLoggedIn)
+      this.authService.logout().subscribe(next => this.tryToRegister());
+    else
+      this.tryToRegister();
   }
 
   private tryToRegister() {
-    this.submitted = true;
+  
     let registerSub = this.authService.Register(this.registerForm.value as IUser).subscribe(ret => {
       if (ret) {
         this.alert.success('Registration successful', true);

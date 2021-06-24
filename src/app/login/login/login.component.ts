@@ -10,12 +10,8 @@ import { AuthService } from '../../login-auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-
-  //tryLogin: boolean = false;
-  //submitted: boolean = false;
-  //loginSub: Subscription | undefined;
-  loginSubscription: Subscription | undefined;
+export class LoginComponent implements OnInit {
+    
   hide: boolean = true;
 
   constructor(private formBuilder: FormBuilder,  private authService: AuthService,
@@ -31,47 +27,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     // temp
     // 1:- Check If I got a Input URL param otherwise a default URL save to redirecting afterward. 
     // 2:- Check from Auth service, if already a user logged in, redirect to the saved url
-    //if (this.authService.isLoggedIn)
-    //  this.router.navigate(['/customers']);
-    this.loginSubscription = this.authService.observeLogin$.subscribe(next => {
-      if (next) //(this.authService.isLoggedIn)
-        this.router.navigate([this.authService.redirectUrl]);
-      else {
-        this.alert.error('Login failed');
-        //this.submitted = false;
-        //this.tryLogin = false;
-      }
-    }
-      , err => console.log('while logging error is ' + err))
-  }
-  ngOnDestroy(): void {
-    this.loginSubscription ? this.loginSubscription.unsubscribe() : '';
-    
+    if (this.authService.isLoggedIn)
+      this.router.navigate([this.authService.redirectUrl]); // '/customers']);
   }
 
   onSubmit(): void {
     const userName = (this.loginForm.value.username as string).trim();
-    const userPass = (this.loginForm.value.password as string).trim();
-   /* this.submitted = true;*/
+    const userPass = (this.loginForm.value.password as string).trim();  
 
-    if (userName && userName.length > 0 && userPass && userPass.length > 0) {
-     /* this.tryLogin = true;*/
+    if (userName && userName.length > 0 && userPass && userPass.length > 0) {     
       // sub to http post observer
       let loginSub = this.authService.login(userName, userPass).
         subscribe(result => {
           loginSub ? loginSub.unsubscribe() : '';
-          console.log(result)
-        }
-        //{
-        //  if (this.authService.isLoggedIn)
-        //    this.router.navigate([this.authService.redirectUrl]);
-        //  else {
-        //    this.alert.error('Login failed');
-        //    this.submitted = false;
-        //    this.tryLogin = false;
-        //  }
-        //}
-        );
+          result ?
+            this.router.navigate([this.authService.redirectUrl]):  this.alert.error('Login failed');
+        });
     }
   }
 }
