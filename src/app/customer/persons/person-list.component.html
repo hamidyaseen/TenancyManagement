@@ -3,7 +3,8 @@
 
   <mat-toolbar>
     <mat-toolbar-row>
-      <span>Person (All)</span>
+      <!--(All)-->
+      <span>Persons </span>
       <span class="flex-spacer"></span>
       <a mat-icon-button aria-label="add icon button" [routerLink]="['add']">
         <mat-icon>add</mat-icon>
@@ -12,19 +13,25 @@
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="secondRow">
-      <span>Second Line</span>
-      <span class="flex-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-toolbar-row *ngIf="secondRow" style="height:111px;">
+      <button mat-icon-button class="favorite-icon" aria-label="icon-button with heart icon">
         <mat-icon>favorite</mat-icon>
       </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <span class="flex-spacer"></span>
+      <mat-form-field appearance="outline" style="width:313px;" [floatLabel]="'always'" *ngIf="incomeRanges$ | async as ranges">
+        <!--(selectionChange)="selectPost($event.value)"-->
+        <mat-select (selectionChange)="selectIncomeRange($event.value)">
+          <mat-option [value]="0">-- Display All --</mat-option>
+          <mat-option *ngFor="let range of ranges" [value]="range.id">[ {{range.range}} ] {{range.currency}}</mat-option>
+        </mat-select>
+        <mat-label>Selecte income range to filter persons</mat-label>
+      </mat-form-field>
+      <span class="flex-spacer"></span>     
+      <button mat-icon-button class="share-icon" aria-label="icon-button with share icon">
         <mat-icon>share</mat-icon>
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
-
-
   <div class="card-body">
     <mat-accordion class="headers-align" *ngIf="persons$ |async as persons" multi>
       <mat-expansion-panel *ngFor="let person of persons">
@@ -36,7 +43,11 @@
         <p class="pad-11"><span style="font-size:large;">Phone: </span> {{person.phone}}</p>
         <p class="pad-11"><span style="font-size:large;">Address: </span> {{person.address}}</p>
       </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="persons?.length===0">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Sorry no person found</mat-panel-title>          
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
     </mat-accordion>
   </div>
 </div>
-<p>Person List Works</p>

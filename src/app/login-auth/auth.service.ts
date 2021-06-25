@@ -18,8 +18,11 @@ export class AuthService
   private loginSubject = new BehaviorSubject(false);
   observeLogin$ = this.loginSubject.asObservable();
 
-  //private userSubject = new BehaviorSubject({} as IUser);
-  //observeUser$ = this.userSubject.asObservable();
+  // Other component/services need to get updated user information
+  // to download user related data like properties, persons and lease informations.
+  // like persons service.
+  private userSubject = new BehaviorSubject({} as IUser);
+  observeUser$ = this.userSubject.asObservable();
 
   constructor(private loginImp: LoginImpService) { }
 
@@ -29,7 +32,7 @@ export class AuthService
         catchError(error => throwError(error)),       
         map(user => {
           this.isLoggedIn = (user?.token?.length === 36);
-     /*     this.userSubject.next(user);*/
+          this.userSubject.next(user);
           this.loginSubject.next(this.isLoggedIn);
           return this.isLoggedIn;
         })
@@ -41,7 +44,7 @@ export class AuthService
       tap(x => {
         if (x) {
           //   this.user = undefined;
-      /*    this.userSubject.next({} as IUser);*/
+          this.userSubject.next({} as IUser);
           this.isLoggedIn = false;
           this.loginSubject.next(this.isLoggedIn);
         }

@@ -14,12 +14,19 @@ export class PersonListComponent implements OnInit {
   secondRow: boolean = false;
   constructor(private personsService: PersonsService) { }
 
-  persons$: Observable<IPerson[]> | undefined; //  temp
-  //persons$ = this.personsService.persons$?.pipe(
-  //  tap(pers => console.log(pers?.length))
-  //);
+  persons$ = this.personsService.persons$?.
+    pipe(
+    tap(pers => console.log(pers?.length))
+  );
+  incomeRanges$ = this.personsService.incomeRanges$
+    .pipe(
+      tap(ranges => console.log(ranges?.length))
+    );
 
   ngOnInit(): void {
   }
-
+  selectIncomeRange(id: number) {
+    console.log(id);
+    this.personsService.selectPersonByRangeId(id);
+  }
 }

@@ -20,7 +20,7 @@ export class LoginImpService {
     return this.http.post<IUser>(this.baseUrl, { username: user, password: pass }, this.postOptions)
       .pipe(
         tap(result => console.log(result.firstName)),
-        catchError(ErrorHandlerService.handle<IUser>('Create new user', {} as IUser))
+        catchError(ErrorHandlerService.handle<IUser>('Validate user', {} as IUser))
       );
   }
 

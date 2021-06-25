@@ -3,11 +3,17 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo, ResponseOptions } from 'angular-in-memory-web-api';
 import { v4 as uuidv4 } from 'uuid';
 import { IdWise } from '../model/idWise';
+import { IIncomeRange } from '../model/incomeRange';
+import { IPerson } from '../model/person';
 import { IUser } from '../model/user';
+import { IncomeRage } from './imcomeRange-data';
+import { Person } from './person-data';
 import { UserData } from './user-data';
 
 export interface IAppData {
   users: IUser[];
+  incomeRanges: IIncomeRange[],
+  persons: IPerson[]
 }
 
 @Injectable({
@@ -22,7 +28,9 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb(reqInfo?: RequestInfo): IAppData {
 
     return ({
-      users: UserData.users      
+      users: UserData.users,
+      incomeRanges: IncomeRage.ranges, // only get request is comming
+      persons: Person.persons
     });
   }
   //public post(reqInfo: RequestInfo) {
