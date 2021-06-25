@@ -1,0 +1,73 @@
+<div class="container">
+
+  <div class="card card-small central-res-card">
+    <mat-toolbar style="background:none;">
+      <mat-toolbar-row>
+        <mat-icon class="pad-11-left">person_add</mat-icon>
+        <span class="pad-11-left">Register Property</span>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <p class="pad-11-left" style="font-size:small">Add a new property record</p>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <form [formGroup]="properForm" (ngSubmit)="onSubmit()" class="align-center">
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-select required formControlName="typeId">
+          <span *ngFor="let type of proertyTypes$ | async">
+            <mat-option [value]="type.id">{{type.name}}</mat-option>
+          </span>
+        </mat-select>
+        <mat-label>Propert Type</mat-label>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Title [optional]</mat-label>
+        <input matInput placeholder="title" formControlName="title">
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="element-md element-sm">
+        <mat-label>Størrelse</mat-label>
+        <input matInput placeholder="værelser" formControlName="size" class="right-numbers" required>
+        <!--<mat-icon matSuffix>edit</mat-icon>-->
+        <span matSuffix>m²</span>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md element-sm">
+        <mat-label>Værelser</mat-label>
+        <input matInput placeholder="værelser" formControlName="rooms" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Street name house number, floor. door and zip code</mat-label>
+        <input (change)="onInputChange($event)" matInput list="dan-adresse" autocomplete="off" placeholder="address"
+               aria-autocomplete="list" formControlName="address" required>
+
+        <datalist *ngIf="addressInfos$| async as streets" id="dan-adresse">
+          <option *ngFor="let street of streets">{{street.tekst}}</option>
+        </datalist>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Yderligere kommentar</mat-label>
+        <input matInput placeholder="Yderligere kommentar" formControlName="note">
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <div style="width: 100%; text-align:center;">
+        <button mat-stroked-button type="button" class="space-md" (click)="location.back()">Back</button>
+        <button mat-stroked-button type="submit" class="space-md" [disabled]="!properForm.valid || !isValid">Add Property</button>
+      </div>
+    </form>
+    <div style="display:none">
+      <p>form status :- {{properForm.status}}</p>
+      <p>form condit :- {{properForm.dirty}}</p>
+    </div>
+  </div>
+</div>
+
+

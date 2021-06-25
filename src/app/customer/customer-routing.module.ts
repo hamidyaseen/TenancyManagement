@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../login-auth/auth-guard';
 import { PersonAddComponent } from './persons/person-add/person-add.component';
+import { PropertyAddComponent } from './properties/property-add/property-add.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
         canActivateChild: [AuthGuard],
         children: [
           { path: 'properties', component: PropertyListComponent },
-          { path: 'tenancies', component: TenacyListComponent },
+          { path: 'properties/add', component: PropertyAddComponent },
+          { path: 'tenancies', component: TenacyListComponent },          
           { path: 'persons', component: PersonListComponent },
           { path: 'persons/add', component: PersonAddComponent },
           { path: 'dashboard', component: DashboardComponent },
@@ -41,7 +43,8 @@ const routes: Routes = [
     PersonListComponent,
     TenacyListComponent,
     DashboardComponent,
-    PersonAddComponent
+    PersonAddComponent,
+    PropertyAddComponent
   ],
   imports: [
     CommonModule,

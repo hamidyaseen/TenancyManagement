@@ -5,15 +5,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { IdWise } from '../model/idWise';
 import { IIncomeRange } from '../model/incomeRange';
 import { IPerson } from '../model/person';
+import { IProperty } from '../model/property';
+import { IPropertyType } from '../model/property-type';
 import { IUser } from '../model/user';
 import { IncomeRage } from './imcomeRange-data';
 import { Person } from './person-data';
+import { Property } from './property-data';
+import { PropertyType } from './property-type-data';
 import { UserData } from './user-data';
 
 export interface IAppData {
   users: IUser[];
   incomeRanges: IIncomeRange[],
-  persons: IPerson[]
+  persons: IPerson[],
+  properties: IProperty[],
+  propertypes: IPropertyType[]
 }
 
 @Injectable({
@@ -30,7 +36,9 @@ export class InMemoryDataService implements InMemoryDbService {
     return ({
       users: UserData.users,
       incomeRanges: IncomeRage.ranges, // only get request is comming
-      persons: Person.persons
+      persons: Person.persons,
+      properties: Property.properties,
+      propertypes: PropertyType.Types
     });
   }
   //public post(reqInfo: RequestInfo) {

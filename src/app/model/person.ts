@@ -1,6 +1,5 @@
 import { IdWise } from "./idWise";
 
-
 export interface IPerson extends IdWise {
   usertoken: string;
   firstName: string;
