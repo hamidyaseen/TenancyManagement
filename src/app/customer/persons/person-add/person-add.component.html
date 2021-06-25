@@ -1,0 +1,65 @@
+<div class="container">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <mat-icon class="pad-11-left">person_add</mat-icon>
+      <span class="pad-11-left">Person</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <span class="pad-11-left x-normal-font">Add information about expected tenant</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="card-body">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="firstName" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email" type="email" name="email" formControlName="email" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="phone" formControlName="phone" autocomplete="off" required>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md" *ngIf="incomeRanges$ | async as incomeRanges">
+        <mat-label>Income range</mat-label>
+        <mat-select reqquired formControlName="incomeRangeId">
+          <span *ngFor="let income of incomeRanges">
+            <mat-option [value]="income.id">{{income.range}}</mat-option>
+          </span>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="element-md">
+        <mat-label>Street name house number, floor. door and zip code</mat-label>
+        <input matInput (change)="onInputChange($event)" autocomplete="off" list="adresse-list" placeholder="address"
+               aria-autocomplete="list" formControlName="address" required>
+        <datalist *ngIf="addressInfos$| async as addressInfos" id="adresse-list">
+          <option *ngFor="let address of addressInfos">{{address.tekst}}</option>
+        </datalist>
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <div style="width: 100%; text-align:center;">
+        <button mat-stroked-button color="primary" type="button" (click)="location.back()" class="space-md">back</button>
+        <button mat-stroked-button color="primary" type="submit" class="space-md" [disabled]="!personForm.valid || !isValid">Add</button>
+      </div>
+
+      <div style="display:none">
+        <p>form status :- {{personForm.status}}</p>
+        <p>form condit :- {{personForm.dirty}}</p>
+      </div>
+    </form>
+  </div>
+</div>

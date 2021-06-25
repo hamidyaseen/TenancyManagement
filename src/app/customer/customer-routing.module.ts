@@ -9,6 +9,7 @@ import { AppMaterialModule } from '../app-material/app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../login-auth/auth-guard';
+import { PersonAddComponent } from './persons/person-add/person-add.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
           { path: 'properties', component: PropertyListComponent },
           { path: 'tenancies', component: TenacyListComponent },
           { path: 'persons', component: PersonListComponent },
+          { path: 'persons/add', component: PersonAddComponent },
           { path: 'dashboard', component: DashboardComponent },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
@@ -38,7 +40,8 @@ const routes: Routes = [
     PropertyListComponent,
     PersonListComponent,
     TenacyListComponent,
-    DashboardComponent
+    DashboardComponent,
+    PersonAddComponent
   ],
   imports: [
     CommonModule,

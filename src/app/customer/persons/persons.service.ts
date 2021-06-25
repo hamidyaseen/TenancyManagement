@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, range } from 'rxjs';
+import { catchError, filter, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../login-auth/auth.service';
 import { Person } from '../../model-data/person-data';
 import { IIncomeRange } from '../../model/incomeRange';
@@ -32,9 +32,12 @@ export class PersonsService {
   rangeSelection$ = this.rangeSubject.asObservable();
   incomeRanges$: Observable<IIncomeRange[]> = this.http.get<IIncomeRange[]>(`${this.baseUrl}/incomeRanges`)
     .pipe(
+      tap(ranges => {
+        console.log(ranges);
+      }),
       catchError(ErrorHandlerService.handle<IIncomeRange[]>('Featch Imcome Ranges',[]))
-    );
-
+  );
+  
   userSub = this.authService.observeUser$.subscribe(nextUser => {
     if (nextUser?.token) {
       this.activeUser = nextUser;

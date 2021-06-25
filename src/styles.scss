@@ -16,6 +16,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0.25em 0.15em;
 }
 
+.pad-11 {
+  padding: 11px;
+}
+
+.pad-11-left {
+  padding: 11px 11px 11px 0px;
+}
+
 
 @media screen and (min-width: 576px) {
   .central-res-card {
