@@ -28,7 +28,7 @@ export class PropertyService {
   properties$: Observable<IProperty[]> | undefined;
 
   posts$: Observable<IPostNumber[]> | undefined;
-  postSubject = new BehaviorSubject<string>('');
+  postSubject = new BehaviorSubject<string>('0');
   postSelection$ = this.postSubject.asObservable();
 
   propTypeSubject = new BehaviorSubject<number>(0);
@@ -85,7 +85,7 @@ export class PropertyService {
         .pipe(
           map(([props, post, type]) => props.filter(prop => {
 
-            if (post?.length > 0) {
+            if (post?.length > 0 && post != '0') {
               if (type > 0)
                 return (prop.postnr === post && prop.typeId === type);
               else

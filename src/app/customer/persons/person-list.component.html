@@ -2,9 +2,8 @@
 <div class="container">
 
   <mat-toolbar>
-    <mat-toolbar-row>
-      <!--(All)-->
-      <span>Persons </span>
+    <mat-toolbar-row>      
+      <span>Persons <span *ngIf="hasNotFiltered()">(-All-)</span><span *ngIf="!hasNotFiltered()">(-Filtered-)</span></span>
       <span class="flex-spacer"></span>
       <a mat-icon-button aria-label="add icon button" [routerLink]="['add']">
         <mat-icon>add</mat-icon>
@@ -14,22 +13,19 @@
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row *ngIf="secondRow" style="height:111px;">
-      <button mat-icon-button class="favorite-icon" aria-label="icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <span class="flex-spacer"></span>
-      <mat-form-field appearance="outline" style="width:313px;" [floatLabel]="'always'" *ngIf="incomeRanges$ | async as ranges">
-        <!--(selectionChange)="selectPost($event.value)"-->
-        <mat-select (selectionChange)="selectIncomeRange($event.value)">
-          <mat-option [value]="0">-- Display All --</mat-option>
-          <mat-option *ngFor="let range of ranges" [value]="range.id">[ {{range.range}} ] {{range.currency}}</mat-option>
-        </mat-select>
-        <mat-label>Selecte income range to filter persons</mat-label>
-      </mat-form-field>
-      <span class="flex-spacer"></span>     
-      <button mat-icon-button class="share-icon" aria-label="icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <form [formGroup]="incomeForm" style="display:contents;">
+        <button mat-icon-button class="favorite-icon" aria-label="icon-button with heart icon"><mat-icon>favorite</mat-icon></button>
+        <span class="flex-spacer"></span>
+        <mat-form-field appearance="outline" style="width:313px;" [floatLabel]="'always'" *ngIf="incomeRanges$ | async as ranges">
+          <mat-select formControlName ="incomeRange" (selectionChange)="selectIncomeRange($event.value)">
+            <mat-option [value]="0">-- Display All --</mat-option>
+            <mat-option *ngFor="let range of ranges" [value]="range.id">[ {{range.range}} ] {{range.currency}}</mat-option>
+          </mat-select>
+          <mat-label>Selecte income range to filter persons</mat-label>
+        </mat-form-field>
+        <span class="flex-spacer"></span>
+        <button mat-icon-button class="share-icon" aria-label="icon-button with share icon"><mat-icon>share</mat-icon></button>
+      </form>      
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="card-body">

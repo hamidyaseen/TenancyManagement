@@ -28,7 +28,7 @@ const routes: Routes = [
           { path: 'persons', component: PersonListComponent },
           { path: 'persons/add', component: PersonAddComponent },
           { path: 'dashboard', component: DashboardComponent },
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+          { path: '', redirectTo: 'properties', pathMatch: 'full' }
         ]
       }      
     ]

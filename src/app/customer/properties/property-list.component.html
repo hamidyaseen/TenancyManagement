@@ -3,43 +3,44 @@
 <div class="container">
   <mat-toolbar>
     <mat-toolbar-row>
-      <span>Properties (All)</span>
+      <span>Properties <span *ngIf="hasFiltered()">(-All-)</span><span *ngIf="!hasFiltered()">(-Filtered-)</span></span>
       <span class="flex-spacer"></span>
       <a mat-icon-button aria-label="add icon button" [routerLink]="['add']">
         <mat-icon>add</mat-icon>
       </a>
       <!--<button mat-icon-button aria-label="add icon button" (click)="addProperty()">
-        <mat-icon>add</mat-icon>
-      </button>-->
+      <mat-icon>add</mat-icon>
+    </button>-->
       <button mat-icon-button aria-label="menu icon button" (click)="secondRow =!secondRow">
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row *ngIf="secondRow" style="height: 111px;">
-
-      <button mat-icon-button class="favorite-icon" aria-label="icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <span class="flex-spacer"></span>
-      <mat-form-field appearance="outline" [floatLabel]="'always'" *ngIf="posts$ | async as posts">
-        <mat-select (selectionChange)="selectPost($event.value)">
-          <mat-option [value]="''">-- Display All --</mat-option>
-          <mat-option *ngFor="let post of posts" [value]="post.postNumber">{{post.postNumber}}</mat-option>
-        </mat-select>
-        <mat-label>Selecte post to filter</mat-label>
-      </mat-form-field>
-      <span class="flex-spacer"></span>
-      <mat-form-field appearance="outline" [floatLabel]="'always'" *ngIf="propTypes$ | async as types">
-        <mat-select (selectionChange)="selectType($event.value)">
-          <mat-option [value]="0">-- Display All --</mat-option>
-          <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
-        </mat-select>
-        <mat-label>Selecte type to filter</mat-label>
-      </mat-form-field>
-      <span class="flex-spacer"></span>      
-      <button mat-icon-button class="icon" aria-label="icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <form [formGroup]="selectionForm" style="display:contents;">
+        <button mat-icon-button class="favorite-icon" aria-label="icon-button with heart icon">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <span class="flex-spacer"></span>
+        <mat-form-field appearance="outline" *ngIf="posts$ | async as posts">
+          <mat-select formControlName="postNumber">            
+            <mat-option [value]="'0'" selected>-- Display All --</mat-option>
+            <mat-option *ngFor="let post of posts" [value]="post.postNumber">{{post.postNumber}}</mat-option>
+          </mat-select>
+          <mat-label>Select post to filter</mat-label>
+        </mat-form-field>
+        <span class="flex-spacer"></span>
+        <mat-form-field appearance="outline" *ngIf="propTypes$ | async as types" style="width:231px;">          
+          <mat-select formControlName="propertyType">
+            <mat-option [value]="0" selected>-- Display All --</mat-option>
+            <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
+          </mat-select>
+          <mat-label>Select property type to filter</mat-label>
+        </mat-form-field>
+        <span class="flex-spacer"></span>
+        <button mat-icon-button class="icon" aria-label="icon-button with share icon">
+          <mat-icon>share</mat-icon>
+        </button>
+      </form>
     </mat-toolbar-row>
   </mat-toolbar>
 
@@ -55,19 +56,12 @@
         <p><span style="font-size:large;">By: </span> {{property.postnrnavn}}</p>
         <p><span style="font-size:large;">Size: </span> {{property.size}}</p>
         <p><span style="font-size:large;">Rums: </span> {{property.rooms}}</p>
-        <button mat-stroked-button color="primary" style="margin-right:31px">
-          <mat-icon>edit_note</mat-icon>
-        </button>
-        <button mat-stroked-button color="primary" [routerLink]="['/tenancies/add']" style="margin-right:31px">Lease</button>
+        <button mat-stroked-button color="primary" style="margin-right:31px"><mat-icon>edit_note</mat-icon></button>
+        <button mat-stroked-button *ngIf="property.leaseId === 0" color="primary" [routerLink]="['/tenancies/add']" style="margin-right:31px">Lease</button>
       </mat-expansion-panel>
     </mat-accordion>
-
-    <!--<div class="list-group" *ngFor="let property of properties">
-      <span class="list-group-item">{{property.address}}</span>
-    </div>-->
-
-    <div *ngIf="properties!.length <= 0">
-      <span>Properties (loading ... No Property found.)</span>
+    <div>
+      <span *ngIf="properties!.length <= 0">Properties (loading ... No Property found.)</span>
     </div>
   </div>
 </div>

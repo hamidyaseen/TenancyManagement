@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 import { tap } from 'rxjs/operators';
-import { IPerson } from '../../model/person';
 import { PersonsService } from './persons.service';
 
 @Component({
@@ -12,10 +11,14 @@ import { PersonsService } from './persons.service';
 export class PersonListComponent implements OnInit {
 
   secondRow: boolean = false;
-  constructor(private personService: PersonsService) {    
+  constructor(private personService: PersonsService, private fb: FormBuilder) { }
+  incomeForm = this.fb.group({ incomeRange: [0] });
+
+  hasNotFiltered(): boolean {
+    return (this.incomeForm.controls['incomeRange'].value === 0)
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
+
   incomeRanges$ = this.personService.incomeRanges$
     .pipe(
       tap(ranges => console.log(ranges?.length))
@@ -25,9 +28,9 @@ export class PersonListComponent implements OnInit {
     pipe(
     tap(pers => console.log(pers?.length))
   );
-    
-  selectIncomeRange(id: number) {
-    console.log(id);
+
+  
+  selectIncomeRange(id: number) {    
     this.personService.selectPersonByRangeId(id);
   }
 }
