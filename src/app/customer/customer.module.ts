@@ -5,7 +5,8 @@ import { CustomerRoutingModule } from './customer-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     CustomerRoutingModule

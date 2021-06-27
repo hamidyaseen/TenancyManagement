@@ -1,0 +1,75 @@
+<div class="container">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <mat-icon class="pad-11-left">person_add</mat-icon>
+      <span class="pad-11-left">Lease a property</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <p class="pad-11-left" style="font-size:small">fill in following information to lease a property</p>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <form [formGroup]="tenancyForm" (ngSubmit)="onSubmit()" class="align-center">
+    <mat-form-field appearance="outline" class="element-md">
+      <mat-select required formControlName="propertyId">
+        <span *ngIf="properties$ | async as properties">
+          <span *ngFor="let property of properties">
+            <mat-option [value]="property">({{property.rooms}} værelser, {{property.size}} m²) &ndash;  {{property.address}} </mat-option>
+          </span>
+        </span>
+      </mat-select>
+      <mat-label>Select property to lease</mat-label>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="element-md">
+      <mat-select required formControlName="personId">
+        <span *ngIf="persons$ | async as persons">
+          <span *ngFor="let person of persons">
+            <mat-option [value]="person">{{person.firstName}} {{person.lastName}} ({{person.incomeRange}})</mat-option>
+          </span>
+        </span>
+      </mat-select>
+      <mat-label>Select a person to lease him/her</mat-label>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>Månedlig leje</mat-label>
+      <input matInput type="number" placeholder="100" formControlName="rent" required class="right-numbers">
+      <span matPrefix>DKK&nbsp;</span>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>Lease starting date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>Elafgifter</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="elCharges" class="right-numbers">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>gebyrer for vandforsyning</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="waterCharges" class="right-numbers">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>opvarmningsforsyningsafgifter</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="warmingCharges" class="right-numbers">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="element-md element-sm">
+      <mat-label>Gebyrer for gasforsyning</mat-label>
+      <input matInput type="number" placeholder="0" formControlName="gasCharges" class="right-numbers">
+    </mat-form-field>
+
+    <div style="width: 100%; text-align:center;">
+      <button mat-raised-button type="button" class="space-md" (click)="location.back()">Back</button>
+      <button mat-raised-button type="submit" class="space-md" [disabled]="!tenancyForm.valid">Lease</button>
+    </div>
+  </form>
+  <div style="display:none">
+    <p>form status :- {{tenancyForm.status}}</p>
+    <p>form condit :- {{tenancyForm.dirty}}</p>
+  </div>
+</div>
+
+
+

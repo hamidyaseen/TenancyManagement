@@ -4,11 +4,13 @@ import { InMemoryDbService, RequestInfo, ResponseOptions } from 'angular-in-memo
 import { v4 as uuidv4 } from 'uuid';
 import { IdWise } from '../model/idWise';
 import { IIncomeRange } from '../model/incomeRange';
+import { ILease } from '../model/lease';
 import { IPerson } from '../model/person';
 import { IProperty } from '../model/property';
 import { IPropertyType } from '../model/property-type';
 import { IUser } from '../model/user';
 import { IncomeRage } from './imcomeRange-data';
+import { Lease } from './lease-data';
 import { Person } from './person-data';
 import { Property } from './property-data';
 import { PropertyType } from './property-type-data';
@@ -19,7 +21,8 @@ export interface IAppData {
   incomeRanges: IIncomeRange[],
   persons: IPerson[],
   properties: IProperty[],
-  propertypes: IPropertyType[]
+  propertypes: IPropertyType[],
+  tenancies: ILease[];
 }
 
 @Injectable({
@@ -38,7 +41,8 @@ export class InMemoryDataService implements InMemoryDbService {
       incomeRanges: IncomeRage.ranges, // only get request is comming
       persons: Person.persons,
       properties: Property.properties,
-      propertypes: PropertyType.Types
+      propertypes: PropertyType.Types,
+      tenancies: Lease.tenancies
     });
   }
   //public post(reqInfo: RequestInfo) {

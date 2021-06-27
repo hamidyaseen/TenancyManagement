@@ -35,9 +35,9 @@
           <mat-panel-title>{{person.firstName}} {{person.lastName}}</mat-panel-title>
           <mat-panel-description *ngIf="person.leaseId !== 0">Tenant <mat-icon>account_circle</mat-icon></mat-panel-description>
         </mat-expansion-panel-header>
-        <p class="pad-11"><span style="font-size:large;">Email: </span> {{person.email}}</p>
-        <p class="pad-11"><span style="font-size:large;">Phone: </span> {{person.phone}}</p>
-        <p class="pad-11"><span style="font-size:large;">Address: </span> {{person.address}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Email: </span> {{person.email}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Phone: </span> {{person.phone}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Address: </span> {{person.address}}</p>
       </mat-expansion-panel>
       <mat-expansion-panel *ngIf="persons?.length===0">
         <mat-expansion-panel-header>

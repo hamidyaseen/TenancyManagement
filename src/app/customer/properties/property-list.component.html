@@ -49,15 +49,18 @@
     <mat-accordion class="headers-align" multi>
       <mat-expansion-panel *ngFor="let property of properties">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{property.address}}</mat-panel-title>
-          <mat-panel-description *ngIf="property.leaseId>0">Leased <mat-icon>account_circle</mat-icon></mat-panel-description>
+          <mat-panel-title style="flex-grow:3">{{property.address}}</mat-panel-title>
+          <mat-panel-description style="flex-grow:1" *ngIf="property.leaseId>0">Leased <mat-icon>account_circle</mat-icon></mat-panel-description>
         </mat-expansion-panel-header>
-        <p><span style="font-size:large;">Post : </span> {{property.postnr}}</p>
-        <p><span style="font-size:large;">By: </span> {{property.postnrnavn}}</p>
-        <p><span style="font-size:large;">Size: </span> {{property.size}}</p>
-        <p><span style="font-size:large;">Rums: </span> {{property.rooms}}</p>
-        <button mat-stroked-button color="primary" style="margin-right:31px"><mat-icon>edit_note</mat-icon></button>
-        <button mat-stroked-button *ngIf="property.leaseId === 0" color="primary" [routerLink]="['/tenancies/add']" style="margin-right:31px">Lease</button>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Post : </span> {{property.postnr}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">By: </span> {{property.postnrnavn}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Størrelse-:</span> {{property.size}} m² ({{property.rooms}} værelser)</p>
+        <!--<p><span style="font-size:large;">Size: </span> {{property.size}}</p>
+  <p><span style="font-size:large;">Rums: </span> {{property.rooms}}</p>-->
+        <div style="width: 100%; text-align:center;">
+          <button mat-stroked-button color="primary" style="margin-right:31px"><mat-icon>edit_note</mat-icon></button>
+          <button mat-stroked-button *ngIf="property.leaseId === 0" color="primary" [routerLink]="['/customer/tenancies/add', property.id]" style="margin-right:31px">Lease</button>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
     <div>

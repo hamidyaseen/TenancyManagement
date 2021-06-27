@@ -17,7 +17,9 @@ export class PersonListComponent implements OnInit {
   hasNotFiltered(): boolean {
     return (this.incomeForm.controls['incomeRange'].value === 0)
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.personService.selectPersonByRangeId(0);
+  }
 
   incomeRanges$ = this.personService.incomeRanges$
     .pipe(

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, map, tap } from 'rxjs/operators';
+import { ILease } from '../../model/lease';
+import { ErrorHandlerService } from '../../services/error-handler.service';
+import { TenancyService } from './tenancy.service';
 
 @Component({
   selector: 'app-tenacy-list',
@@ -8,7 +12,12 @@ import { Component, OnInit } from '@angular/core';
 export class TenacyListComponent implements OnInit {
 
   secondRow: boolean = false;
-  constructor() { }
+  constructor(private tenancyService: TenancyService) { }
+  tenancies$ = this.tenancyService.tenanciesPropertyPerson$?.
+    pipe(
+      map(tenancies => tenancies.map(tenancy => ({ ...tenancy, costMonthly: (tenancy.rent + tenancy.elCharges + tenancy.gasCharges + tenancy.warmingCharges + tenancy.waterCharges) }))),
+      catchError(ErrorHandlerService.handle<ILease[]>('Fetch leases', []))
+    );
 
   ngOnInit(): void {
   }

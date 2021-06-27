@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../login-auth/auth-guard';
 import { PersonAddComponent } from './persons/person-add/person-add.component';
 import { PropertyAddComponent } from './properties/property-add/property-add.component';
+import { TenancyAddComponent } from './tenancies/tenancy-add/tenancy-add.component';
 
 const routes: Routes = [
   {
@@ -24,11 +25,13 @@ const routes: Routes = [
         children: [
           { path: 'properties', component: PropertyListComponent },
           { path: 'properties/add', component: PropertyAddComponent },
-          { path: 'tenancies', component: TenacyListComponent },          
+          { path: 'tenancies', component: TenacyListComponent },
+          { path: 'tenancies/add/:id', component: TenancyAddComponent },
+          { path: 'tenancies/add', component: TenancyAddComponent },
           { path: 'persons', component: PersonListComponent },
           { path: 'persons/add', component: PersonAddComponent },
           { path: 'dashboard', component: DashboardComponent },
-          { path: '', redirectTo: 'properties', pathMatch: 'full' }
+          { path: '', redirectTo: 'tenancies', pathMatch: 'full' }
         ]
       }      
     ]
@@ -44,7 +47,8 @@ const routes: Routes = [
     TenacyListComponent,
     DashboardComponent,
     PersonAddComponent,
-    PropertyAddComponent
+    PropertyAddComponent,
+    TenancyAddComponent,
   ],
   imports: [
     CommonModule,

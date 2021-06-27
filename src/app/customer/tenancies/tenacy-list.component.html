@@ -1,33 +1,34 @@
 <div class="container">
-
   <mat-toolbar>
     <mat-toolbar-row>
-      <span>Person (All)</span>
+      <span>Tenancies</span>
       <span class="flex-spacer"></span>
-      <a mat-icon-button aria-label="add icon button" [routerLink]="['add']">
-        <mat-icon>add</mat-icon>
-      </a>
-      <button mat-icon-button aria-label="menu icon button" (click)="secondRow =!secondRow">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="secondRow">
-      <span>Second Line</span>
-      <span class="flex-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
-    </mat-toolbar-row>
+      <a mat-icon-button aria-label="add icon button" [routerLink]="['add']"><mat-icon>add</mat-icon></a>
+    </mat-toolbar-row>   
   </mat-toolbar>
-
-
   <div class="card-body">
-    <mat-accordion class="headers-align" multi>
-
+    <mat-accordion class="headers-align" multi *ngIf="tenancies$ |async as tenancies">
+      <mat-expansion-panel *ngFor="let tenancy of tenancies">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{tenancy.property?.address}}</mat-panel-title>
+          <!--<mat-panel-description> Type your name and age <mat-icon>account_circle</mat-icon></mat-panel-description>-->
+        </mat-expansion-panel-header>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Størrelse-:</span> {{tenancy.property?.size}} m² ({{tenancy.property?.rooms}} værelser)</p>
+        <p class="pad-11 no-margin">
+          <span style="font-size:large;">Månedlig leje-:</span>
+          <span> {{tenancy.costMonthly}} {{tenancy.currency}}</span>          
+          <span>( {{tenancy.rent}}</span>
+          <span *ngIf="tenancy.elCharges>0">+ {{tenancy.elCharges}}.00 El </span>
+          <span *ngIf="tenancy.waterCharges>0">+ {{tenancy.waterCharges}}.00 Vand</span>
+          <span *ngIf="tenancy.warmingCharges>0">+ {{tenancy.warmingCharges}}.00 Opvarmning</span>
+          <span *ngIf="tenancy.gasCharges>0">+ {{tenancy.gasCharges}}.00 Gas</span>
+          <span> ) </span>
+        </p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Lease date-: </span> {{tenancy.startDate}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Tenant-: </span>{{tenancy.person?.firstName}} {{tenancy.person?.lastName}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Phone-: </span>{{tenancy.person?.phone}}</p>
+        <p class="pad-11 no-margin"><span style="font-size:large;">Email-: </span>{{tenancy.person?.email}}</p>
+      </mat-expansion-panel>
     </mat-accordion>
   </div>
 </div>
-<p>tenacy-list works!</p>

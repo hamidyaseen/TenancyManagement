@@ -109,9 +109,7 @@ export class PropertyService {
 //          return of({} as IProperty);
 //        }
   addProperty(property: IProperty): Observable<boolean> {
-    return this.http.post<IProperty>(this.baseUrl + '/properties',
-      { ...property, usertoken: this.activeUser?.token },
-      this.httpOption)
+    return this.http.post<IProperty>(this.baseUrl + '/properties', { ...property, usertoken: this.activeUser?.token }, this.httpOption)
       .pipe(
         tap(prop => console.log(prop)),
         catchError(ErrorHandlerService.handle<IProperty>('Add property service', {} as IProperty)),
