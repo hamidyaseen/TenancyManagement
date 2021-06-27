@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import { PersonsService } from './persons.service';
@@ -8,10 +8,11 @@ import { PersonsService } from './persons.service';
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.scss']
 })
-export class PersonListComponent implements OnInit {
+export class PersonListComponent implements OnInit, OnDestroy {
 
   secondRow: boolean = false;
   constructor(private personService: PersonsService, private fb: FormBuilder) { }
+    
   incomeForm = this.fb.group({ incomeRange: [0] });
 
   hasNotFiltered(): boolean {
@@ -19,6 +20,9 @@ export class PersonListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.personService.selectPersonByRangeId(0);
+  }
+  ngOnDestroy(): void {
+    this.personService?.selectPersonByRangeId(0);
   }
 
   incomeRanges$ = this.personService.incomeRanges$
