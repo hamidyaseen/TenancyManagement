@@ -1,0 +1,15 @@
+<div class="content">
+  <div *ngIf="activeUser$|async as theUser">
+    <h3>{{theUser.firstName}} {{theUser.lastName}}</h3>
+    <div class="card-container">
+      <div class="card card-small">
+        <div class="profile-initials"></div>
+        <span>Picture</span>
+      </div>
+      <div class="card card-small"> Profile Info</div>
+      <div class="card card-small">
+        <p> user name : {{theUser.username}} </p>
+      </div>
+    </div>
+  </div>  
+</div>

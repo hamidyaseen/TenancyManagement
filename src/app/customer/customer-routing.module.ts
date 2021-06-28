@@ -12,6 +12,7 @@ import { AuthGuard } from '../login-auth/auth-guard';
 import { PersonAddComponent } from './persons/person-add/person-add.component';
 import { PropertyAddComponent } from './properties/property-add/property-add.component';
 import { TenancyAddComponent } from './tenancies/tenancy-add/tenancy-add.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
           { path: 'tenancies/add', component: TenancyAddComponent },
           { path: 'persons', component: PersonListComponent },
           { path: 'persons/add', component: PersonAddComponent },
-          { path: 'dashboard', component: DashboardComponent },
+          { path: 'profile', component: ProfileComponent },
           { path: '', redirectTo: 'tenancies', pathMatch: 'full' }
         ]
       }      
@@ -49,6 +50,7 @@ const routes: Routes = [
     PersonAddComponent,
     PropertyAddComponent,
     TenancyAddComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

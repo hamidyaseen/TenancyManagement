@@ -16,8 +16,8 @@
         <p class="pad-11 no-margin"><span style="font-size:large;">Størrelse-:</span> {{tenancy.property?.size}} m² ({{tenancy.property?.rooms}} værelser)</p>
         <p class="pad-11 no-margin">
           <span style="font-size:large;">Månedlig leje-:</span>
-          <span> {{tenancy.costMonthly}} {{tenancy.currency}}</span>          
-          <span>( {{tenancy.rent}}</span>
+          <span> {{tenancy.costMonthly}} {{tenancy.currency}}</span>
+          <span>( {{tenancy.rent}}.00 </span>
           <span *ngIf="tenancy.elCharges>0">+ {{tenancy.elCharges}}.00 El </span>
           <span *ngIf="tenancy.waterCharges>0">+ {{tenancy.waterCharges}}.00 Vand</span>
           <span *ngIf="tenancy.warmingCharges>0">+ {{tenancy.warmingCharges}}.00 Opvarmning</span>
@@ -28,6 +28,9 @@
         <p class="pad-11 no-margin"><span style="font-size:large;">Tenant-: </span>{{tenancy.person?.firstName}} {{tenancy.person?.lastName}}</p>
         <p class="pad-11 no-margin"><span style="font-size:large;">Phone-: </span>{{tenancy.person?.phone}}</p>
         <p class="pad-11 no-margin"><span style="font-size:large;">Email-: </span>{{tenancy.person?.email}}</p>
+        <div style="width: 100%; text-align:center;">          
+          <button mat-stroked-button color="primary" (click)="endTenancy(tenancy)" style="margin-right:31px">Slet lejekontrakt</button>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

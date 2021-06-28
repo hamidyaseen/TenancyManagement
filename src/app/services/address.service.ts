@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, retry, tap } from 'rxjs/operators';
 import { IAddressInfo } from '../model/addressInfo';
 import { ErrorHandlerService } from './error-handler.service';
 
@@ -18,6 +18,7 @@ export class AddressService {
     return this.http.get<IAddressInfo[]>(`${this.baseUrl}?q=${name}`)
       .pipe(
         tap(v => console.log(v.length)),
+        retry(2), // retry a failed request 2 times
         catchError(ErrorHandlerService.handle<IAddressInfo[]>('search address infor', []))
     );
   }

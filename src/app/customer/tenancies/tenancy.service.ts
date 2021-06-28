@@ -69,4 +69,11 @@ export class TenancyService {
         tap(l => console.log(l))
       )
   }
+  public deleteTenancy(leaseId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/tenancies/${leaseId}`, { headers: new HttpHeaders({ 'content-type': 'application/json' }) }).
+      pipe(
+        catchError(ErrorHandlerService.handle<any>('delete tenancy'))
+      );
+
+  }
 }

@@ -35,7 +35,7 @@ const routes: Routes = [
     PathNotFoundComponent
   ],
   imports: [
-    // As I am linking top component to app routing
+    // As I am linking top components to app routing
     CommonModule,
     RouterModule.forRoot(routes),
     LoginModule,
