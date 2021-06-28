@@ -35,6 +35,8 @@ export class PropertyListComponent implements OnInit, OnDestroy {
     this.propertyService.propTypeSubject.next(0);
   }
   ngOnDestroy(): void {
+    this.propertyService.postSubject.next('0');
+    this.propertyService.propTypeSubject.next(0);
     this.postNumberSub ? this.postNumberSub.unsubscribe() : '';
     this.propTypeSub ? this.propTypeSub.unsubscribe() : '';
   }

@@ -7,27 +7,27 @@
     </button>
     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
       <ul class="navbar-nav flex-grow">
-        <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link text-dark" [routerLink]="['/home']">Home</a>
-        </li>
+        <!--<li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+      <a class="nav-link text-dark" [routerLink]="['/home']">Home</a>
+    </li>-->
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark" [routerLink]="['/customer']">Lejekontrakter</a>
-        </li>      
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/privacy']">Privacy</a>
-        </li>       
+        </li>
+        <!--<li class="nav-item" [routerLinkActive]="['link-active']">
+      <a class="nav-link text-dark" [routerLink]="['/privacy']">Privacy</a>
+    </li>-->
         <li class="nav-item" [routerLinkActive]="['link-active']">
           <a class="nav-link text-dark" [routerLink]="['/about']">About</a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['link-active']">          
-          <a class="nav-link text-dark" *ngIf="(observeLogin$|async)===false" [routerLink]="['/login']">Login</a>
-          <a class="nav-link text-dark" *ngIf="(observeLogin$|async)===true" (click)="logMeOut()">Logout</a>
+        <li class="nav-item" [routerLinkActive]="['link-active']">
+          <a class="nav-link text-dark" *ngIf="(observeLogin$|async)===false" [routerLink]="['/login']">Log ind</a>
+          <a class="nav-link text-dark" *ngIf="(observeLogin$|async)===true" (click)="logMeOut()">Log ud</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['link-active']">
-          <a class="nav-link text-dark" [routerLink]="['/register']">Join Now</a>
+          <a class="nav-link text-dark" [routerLink]="['/register']">Kom i gang</a>
         </li>
       </ul>
-    </div>
+     </div>
   </div>
 </nav>
 <about-alert></about-alert>

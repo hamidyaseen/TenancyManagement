@@ -3,13 +3,13 @@
   <!-- Toolbar -->
   <div class="toolbar" role="banner">
     <img width="40" src="assets/images/main.png" />
-    <span>Welcome to</span>
+    <span>Welcome <span *ngIf="activeUser$|async as user">to {{user.firstName}} {{user.lastName}}</span>  </span>
     <div class="flex-spacer"></div>
     <nav >
       <button mat-flat-button [routerLink]="['./properties']" class="plane-text">Properties</button>
       <button mat-flat-button [routerLink]="['./tenancies']" class="plane-text">Tenancies</button>
       <button mat-flat-button [routerLink]="['./persons']" class="plane-text">Persons</button>
-      <button mat-flat-button [routerLink]="['./dashboard']" class="plane-text">Dashboard</button>
+      <button mat-flat-button [routerLink]="['./dashboard']" class="plane-text">Portfolio</button>
     </nav>
   </div> 
   
