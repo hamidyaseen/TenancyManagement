@@ -19,7 +19,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule),
     
-  },
+  },  
   { path: 'privacy', component: PrivacyComponent },
   { path: 'desktop', component: DesktopComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

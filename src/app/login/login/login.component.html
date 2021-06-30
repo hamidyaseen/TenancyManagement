@@ -9,17 +9,21 @@
         <p class=".pad-11-left" style="font-size:small">login to manage leases</p>
       </mat-toolbar-row>
     </mat-toolbar>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <!--(ngSubmit)="onSubmit()"-->
+    <form [formGroup]="loginForm">
       <mat-form-field appearance="outline" class="element-md">
         <mat-label>User Name</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="username" autocomplete="off" required>
+        <input matInput placeholder="Placeholder" formControlName="username"
+               autocomplete="off" (keydown.enter)="enterPressed($event)" required>
         <mat-icon matSuffix>edit</mat-icon>
         <!--<mat-hint>Hint</mat-hint>-->
       </mat-form-field>
-    
+
       <mat-form-field appearance="outline" class="element-md">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" placeholder="password" formControlName="password" autocomplete="off" required>
+        <input matInput [type]="hide ? 'password' : 'text'"
+               placeholder="password" formControlName="password"
+               autocomplete="off" (keydown.enter)="enterPressed($event)" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -27,7 +31,7 @@
       <div style="width: 100%; text-align:center;">
         <!--<button mat-stroked-button color="primary" routerLink="/register" class="space-md">Register new user</button>-->
         <button mat-stroked-button color="primary" routerLink="/home" class="space-md">Back</button>
-        <button mat-stroked-button color="primary" type="submit" class="space-md">Login</button>
+        <button mat-stroked-button color="primary" class="space-md" (click)="onSubmit()" [disabled]="!loginForm.valid">Login</button>
       </div>
     </form>
     <div style="display:none">
@@ -37,3 +41,6 @@
   </div>
 </div>
 
+
+<!--<div #myDiv>
+</div>-->

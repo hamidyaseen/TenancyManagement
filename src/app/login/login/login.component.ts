@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,12 +10,20 @@ import { AlertService } from '../../services/alert.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
     
   hide: boolean = true;
+  @ViewChild("aSubmit") loginBtn: ElementRef | undefined;
+/*  @ViewChild("myDiv") divView: ElementRef | undefined;*/
+ 
 
   constructor(private formBuilder: FormBuilder,  private authService: AuthService,
     private router: Router, private alert: AlertService) {
+   /* console.log(this.divView);*/
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.loginBtn);
   }
 
   loginForm: FormGroup = this.formBuilder.group({
@@ -29,6 +37,11 @@ export class LoginComponent implements OnInit {
     // 2:- Check from Auth service, if already a user logged in, redirect to the saved url
     if (this.authService.isLoggedIn)
       this.router.navigate([this.authService.redirectUrl]); // '/customers']);
+
+  }
+    
+  public enterPressed(event: Event): void {
+    event.preventDefault();
   }
 
   onSubmit(): void {
